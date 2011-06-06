@@ -27,14 +27,33 @@ package {
 			
 			
 			//var arg:String = '429';
-			var arg:String = 'amfphp_techblog_all&limit=10';
+			var arg:Array = new Array();
+			
+			
 			
 			//gateway.call( "node.get", responder, arg);
-			gateway.call( "views.get", responder, arg);      
+			gateway.call( "views.get", responder, 'amfphp_techblog_all','',arg, 0, 10);      
+			
+			
+			
+			/*
+			string view_name (required)
+			View name.
+				string display_id (optional)
+			A display provided by the selected view.
+				array args (optional)
+			An array of arguments to pass to the view.
+				int offset (optional)
+			An offset integer for paging. For example to get item from 6 to 15, pass offset=5 and limit=10.
+				int limit (optional)
+			A limit integer for paging. For example to get item from 6 to 15, pass offset=5 and limit=10.
+				boolean format_output (optional)
+			TRUE if view should be formatted, or only the view result returned (FALSE by default).
+			*/
 		}
 		
 		public function onResult(responds:Object):void {
-			txt.text = "onResult: " + responds.title ;
+			txt.text = "onResult: \n";
 			reflect(responds);
 		}
 		
@@ -79,7 +98,7 @@ package {
 		
 		private function reflect(obj:Object):void{
 			for(var i:String in obj){
-				txt.appendText("\n"+i+": "+obj[i]);
+				txt.appendText("\n"+i+": "+obj[i].node_title);
 			}
 		}
 	}
